@@ -81,6 +81,7 @@ fn parse_patterns(input: &str) -> Result<Vec<(String, String)>> {
 mod tests {
     use super::*;
     use colored::*;
+    use std::path::PathBuf;
 
     fn name_list() -> Vec<String> {
         let content = include_str!("./name-list.txt");
@@ -141,6 +142,7 @@ mod tests {
             ph => ff => f => v => vh; 
             na => ne;
             er => aer;
+            dwa => dva => tva => cha; 
             ao => ai => aiwa => awa => a; 
             d => t; 
             tta => tva; 
@@ -164,10 +166,12 @@ mod tests {
         let mut corruptor = Corruptor::new(patterns);
         let mut remaining = 0;
         const N: usize = 4;
+        let mut readme_content = "# Name Corruptor\n\n".to_string();
+
         for name in name_list() {
             let name = name.to_lowercase();
             let mut generated = vec![name.clone()];
-            let mut message = format!("{:12}", name);
+            let mut message = format!("    {:12}", name);
             for i in 0..N {
                 let next = &generated[generated.len() - 1];
                 let corrupted = corruptor.corrupt_once(next);
@@ -175,6 +179,7 @@ mod tests {
                 message.push_str(&format!(" => {:12}", corrupted));
             }
             let final_name = &generated[generated.len() - 1];
+            readme_content.push_str(&format!("{}\n", message));
             let message = if final_name == &name {
                 remaining += 1;
                 message.red()
@@ -184,7 +189,13 @@ mod tests {
             eprintln!("{}", message);
         }
         assert_eq!(remaining, 0, "didn't managed to corrupt all names");
-        assert!(false);
+
+        readme_content.push_str("```\n");
+        let readme_path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("README.md");
+        let old_readme = std::fs::read_to_string(&readme_path)?;
+        if old_readme != readme_content {
+            std::fs::write(readme_path, readme_content)?;
+        }
         Ok(())
     }
 }

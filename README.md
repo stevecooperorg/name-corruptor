@@ -1,1 +1,55 @@
-# name-corruptor
+# Name Corruptor
+
+    agatha       => agadda       => agata        => agata        => agata       
+    aldwin       => altwin       => altwen       => altwun       => altwum      
+    althea       => alddea       => altea        => altea        => altea       
+    anselm       => antzelm      => intzelm      => aintzelm     => aiwantzelm  
+    armin        => armen        => armun        => armum        => armium      
+    bartholomew  => partholomew  => fartholomew  => farddolomew  => fartolomew  
+    berengar     => baerengar    => baerungar    => baerumgar    => baeriumgar  
+    clarice      => clarihce     => claryce      => claryce      => claryce     
+    constance    => konstance    => khonstance   => khonstince   => khonstaince 
+    dierk        => dieyrk       => tieyrk       => tiheyrk      => tyeyrk      
+    eadric       => eadrick      => eadrik       => eadrijk      => eatrijk     
+    edward       => edvard       => etvard       => echard       => echart      
+    eldrida      => eldrihda     => eldryda      => eltryta      => eltryta     
+    elfric       => elfrihc      => elfryc       => elvryc       => elvhryc     
+    erna         => erne         => aerne        => aerne        => aerne       
+    eustace      => eustache     => eusteiche    => eusteeche    => eusteeckhe  
+    felicity     => velicity     => vhelicity    => vhelihcihty  => vhelycyty   
+    finnegan     => finnegin     => fainnegain   => vainnegain   => vhainnegain 
+    giselle      => gisella      => gisellya     => gihsellya    => gysellya    
+    gerald       => girald       => gidrald      => gitralt      => gihtralt    
+    godric       => godrick      => godrik       => godrijk      => gotrijk     
+    gunther      => gumther      => giumther     => gihumther    => gyumther    
+    hadrian      => hadriin      => hadriain     => hadrayain    => hadrayaiwan 
+    heloise      => heloihse     => heloyse      => heloize      => heloite     
+    isolde       => isolte       => ihsolte      => ysolte       => izolte      
+    ivor         => ivhor        => ihvhor       => yvhor        => yvhhor      
+    jocelyn      => jocielyn     => joselyn      => jotzelyn     => jotzelyn    
+    lancelot     => lancelod     => lancelot     => lincelot     => laincelot   
+    lysandra     => lizandra     => litandra     => litzandra    => litsandra   
+    magnus       => magnaes      => magnees      => magnees      => magnees     
+    melisande    => melisante    => melihsante   => melysante    => melysinte   
+    merrick      => merrich      => merrech      => merreckh     => maerreckh   
+    osborn       => osporn       => osforn       => osvorn       => osvhorn     
+    philomena    => philomene    => philomune    => philomume    => philomiume  
+    reginald     => regihnald    => regynald     => regyneld     => regynelt    
+    rowena       => rowuna       => rowuma       => rowiuma      => rowihuma    
+    sabine       => sapine       => safine       => safaine      => zafaine     
+    seraphina    => seraffina    => serafina     => seravina     => seravhina   
+    sigfrid      => sigfrit      => sihgfriht    => sygfryt      => sygvryt     
+    tiberius     => tibaerius    => tihbaerihus  => tybaeryus    => typaeryus   
+    ulf          => ulv          => ulvh         => ulvh         => ulvh        
+    urien        => uriun        => urium        => uriium       => urihihum    
+    vespera      => vesfera      => vesfira      => vesfidra     => vesvidra    
+    wendel       => wentel       => wuntel       => wumtel       => wiumtel     
+    wilfred      => wihlfred     => wylfred      => wylvred      => wylvhred    
+    winifred     => winifret     => wenifret     => wunifret     => wumifret    
+    xenia        => xeniha       => xenya        => xunya        => xumya       
+    ysabel       => ysapel       => ysafel       => izafel       => itafel      
+    zephyr       => zeffyr       => zefyr        => zevyr        => zevhyr      
+    zinnia       => zennia       => zunnia       => zumnia       => ziumnia     
+    zuriel       => zurihel      => zuryel       => tzuryel      => tzuryel     
+    zygmund      => zygmunt      => zygmumt      => zygmiumt     => zygmihumt   
+```
