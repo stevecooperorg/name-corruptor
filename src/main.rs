@@ -5,37 +5,62 @@ fn main() {
     println!("Hello, world!");
 }
 
+/// The Corruptor takes a word, and generates a new word
+/// by applying Grimm's Law-style patterns. You can drive it one
+/// step at a time, or you can drive it for a number of iterations.
+/// Think of an iteration being a move like 'what would this name
+/// be like in the next country over?'
 struct Corruptor {
     patterns: Vec<(String, String)>,
     cursor: usize,
 }
 
 impl Corruptor {
+    /// construct a new Corruptor with the given patterns
     fn new(patterns: Vec<(String, String)>) -> Self {
-        Corruptor {
-            patterns,
-            cursor: 0,
-        }
+        let cursor = patterns.len();
+        Corruptor { patterns, cursor }
     }
 
+    /// corrupt the given name once, and return the new name
     fn corrupt_once(&mut self, name: &str) -> String {
         let mut name = name.to_string();
 
+        // we want to cycle through the available patterns -- so if we have 10 patterns,
+        // we would start by applying pattern 0, then 1, then 2, until one of them changes
+        // the name. E.g., if pattern 0 is (d => t) and we apply it to 'david', we get 'tavit'.
+        // But if we change 'susan' get set 'susan' back, and we should try another one. We
+        // advance until either we complete a loop with no change (the failure state, so to
+        // speak) or we find a new variant of the name.
+        //
+        // We've now left the corruptor with a new cursor position, so if you try again with the
+        // same name it tries different patterns.
         let starting_cursor = self.cursor;
+
+        // advance the cursor through the patterns, looping if necessary
         let mut cursor = (starting_cursor + 1) % self.patterns.len();
+
+        // keep going until we have tried applying all the patterns;
         while cursor != starting_cursor {
+            // grab a pattern like ("d", "t")
             let (pattern, replacement) = &self.patterns[cursor];
+
+            // replace it - eg "david".replace("d", "t") => "tavit"
             let new_name = name.replace(pattern, replacement);
             if new_name != name {
+                // if the name changed, we're done
                 self.cursor = cursor;
                 return Self::relax(new_name);
             }
+
+            // if not, keep going with the next pattern
             cursor = (cursor + 1) % self.patterns.len();
         }
 
         name
     }
 
+    /// apply several iterations of corrupt_once
     fn corrupt(&mut self, name: &str, iterations: usize) -> String {
         let mut remaining_iterations = iterations;
         let mut name = name.to_string();
@@ -46,7 +71,10 @@ impl Corruptor {
         name
     }
 
+    // sometimes the rules end up with silliness, like "alffffffffonzo". The relax method
+    // is supposed to 'chill out' the name a little bit to make it more real
     fn relax(name: impl Into<String>) -> String {
+        /// the only pattern we recognize is three of the same letter in a row, like "aaa"
         let mut name = name.into();
         for c in 'a'..'z' {
             let search = format!("{}{}{}", c, c, c);
@@ -57,14 +85,20 @@ impl Corruptor {
     }
 }
 
+/// Parse a complex pattern string into pairs -- example mighe be
+/// "bh => b => p => f; dh => d => t => th"
+/// this contains two sequences (note the semicolon) and the sequences
+/// contain pairs lie bh->b, b->p, etc.
 fn parse_patterns(input: &str) -> Result<Vec<(String, String)>> {
     let mut patterns = Vec::new();
 
+    // split on semicolon, then split on "=>" and trim whitespace
     for sequence in input.split(";").map(|l| l.trim()) {
         let mut parts: VecDeque<&str> = sequence.split("=>").map(|l| l.trim()).collect();
         if parts.len() == 0 {
             continue;
         }
+        // a zip algorithm which pairs up adjascent elements
         let mut prev_part = parts
             .pop_front()
             .context("should have at least one entry")?;
@@ -124,6 +158,15 @@ mod tests {
         let mut corruptor = Corruptor::new(patterns);
         let corrupted_name = corruptor.corrupt("agatha", 1);
         assert_eq!(corrupted_name, "agaffa");
+        Ok(())
+    }
+
+    #[test]
+    fn corrupt_david() -> Result<()> {
+        let patterns = parse_patterns("d => t")?;
+        let mut corruptor = Corruptor::new(patterns);
+        let corrupted_name = corruptor.corrupt_once("david");
+        assert_eq!(corrupted_name, "tavit");
         Ok(())
     }
 
