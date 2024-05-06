@@ -1,5 +1,6 @@
 # Name Corruptor
 
+```
     agatha       => agadda       => agata        => agata        => agata       
     aldwin       => altwin       => altwen       => altwun       => altwum      
     althea       => alddea       => altea        => altea        => altea       
@@ -53,3 +54,39 @@
     zuriel       => zurihel      => zuryel       => tzuryel      => tzuryel     
     zygmund      => zygmunt      => zygmumt      => zygmiumt     => zygmihumt   
 ```
+
+This implements a little idea I was thinking about around generating fantasy names from historical ones --
+
+So I was thinking that I like fantasy names that are variants of more historic names - think Neddard Stark from Edward of York, Geralt from Gerald, that sort of thing. So I was wondering how you might generate that. 
+
+There's a bit of linguistics called Grimm's Law, that shows how European languages shift certain consonants about. Eg, a 'd' in german can often become a 't' or a 'th' in English, and a 'p' in french becomes an 'f' in english.
+
+here's the laws;
+
+* bʰ → b → p → f
+* dʰ → d → t → θ
+* gʰ → g → k → x
+* gʷʰ → gʷ → kʷ → xʷ
+
+and here's some examples;
+
+broder -> brother, 
+pied -> foot
+dent -> tooth
+grain -> corn
+
+So I'm thinking this is the sort of thing you could use for "gerald -> geralt" because d->t.
+
+So a rough idea:
+
+- split a word into characters or maybe little sounds like 'er' -- eg { G ER AL D }
+- search for shifts you can make according to rules - eg { G ER  AL T < D } 
+- reconstitute it into a new word - GERALT
+
+Then you can generate names by starting with a list of common names, and applying one or more 'shift operations' on it, and see what pops out. 
+
+So maybe something like 
+
+    Edward -> Edard -> Nedard -> Nethart
+
+Might help with generating names that 'feel a bit right' -- so probably for games that have a European feel, like Warhammer FRP, or the Witcher, etc. 
